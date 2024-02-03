@@ -1,0 +1,34 @@
+"""
+111. Minimum Depth of Binary Tree
+Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+Note: A leaf is a node with no children.
+"""
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0  # Check if the root is None (empty tree), then return 0 as the depth.
+
+        queue = deque([root])  # Initialize a deque (double-ended queue) with the root node.
+
+        level = 1  # Start with level 1, as we are including the root node in the depth.
+
+        while queue:
+            for i in range(len(queue)):
+                node = queue.popleft()  # Remove and return the leftmost element from the queue.
+
+                if not node.left and not node.right:
+                    return level  # If the current node is a leaf (no left and right children), return the current level as the minimum depth.
+
+                if node.left:
+                    queue.append(node.left)  # If the node has a left child, append it to the queue for later processing.
+                
+                if node.right:
+                    queue.append(node.right)  # Similarly, append the right child if it exists.
+            
+            level += 1  # Increment the level (depth) after processing all nodes at the current level.
+        
+        return level  # Return the level (this line is theoretically not reached due to the return statement within the loop).
+      
