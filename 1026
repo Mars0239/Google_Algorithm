@@ -1,0 +1,21 @@
+"""
+1026. Maximum Difference Between Node and Ancestor
+Given the root of a binary tree, find the maximum value v for which there exist different nodes a and b where v = |a.val - b.val| and a is an ancestor of b.
+
+A node a is an ancestor of b if either: any child of a is equal to b or any child of a is an ancestor of b.
+"""
+class Solution:
+    def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
+        ans = 0  # Initialize the maximum difference as 0.
+        def dfs(node: Optional[TreeNode], mn: int, mx: int) -> None:
+            if node is None: return  # Base case: if the node is None, return immediately.
+            mn = min(mn, node.val)  # Update the minimum value found in the path.
+            mx = max(mx, node.val)  # Update the maximum value found in the path.
+            nonlocal ans
+            ans = max(ans, node.val - mn, mx - node.val)  # Update the maximum difference found so far.
+            dfs(node.left, mn, mx)  # Recursively call DFS for the left subtree.
+            dfs(node.right, mn, mx)  # Recursively call DFS for the right subtree.
+        dfs(root, root.val, root.val)  # Initial call to dfs with root node and its value as both min and max.
+        return ans  # Return the maximum difference found.
+
+
