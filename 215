@@ -1,0 +1,21 @@
+"""
+215. Kth Largest Element in an Array
+Given an integer array nums and an integer k, return the kth largest element in the array.
+
+Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+Can you solve it without sorting?
+"""
+import heapq
+
+class Solution:
+  def findKthLargest(self, nums, k):
+    
+    heap = nums #make a min heap
+    heapq.heapify(heap) 
+
+    for _ in range(len(nums) - k): #We then pop the smallest element from the heap len(nums) - k times.
+      heapq.heappop(heap) #By popping the smallest elements repeatedly, we are left with the k largest elements in the heap.
+
+    return heap[0] #The remaining heap contains the k largest elements
+        
