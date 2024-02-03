@@ -1,0 +1,27 @@
+"""
+188. Best Time to Buy and Sell Stock IV
+
+You are given an integer array prices where prices[i] is the price of a given stock on the ith day, and an integer k.
+
+Find the maximum profit you can achieve. You may complete at most k transactions: i.e. you may buy at most k times and sell at most k times.
+
+Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+
+"""
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        @cache
+        def dp(i, holding, remain):
+            if i == len(prices) or remain == 0:
+                return 0
+            
+            ans = dp(i + 1, holding, remain)
+            if holding:
+                ans = max(ans, prices[i] + dp(i + 1, False, remain - 1))
+            else:
+                ans = max(ans, -prices[i] + dp(i + 1, True, remain))
+            
+            return ans
+        
+        return dp(0, False, k)
