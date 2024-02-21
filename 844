@@ -1,0 +1,21 @@
+"""
+844. Backspace String Compare
+Given two strings s and t, return true if they are equal when both are typed into empty text editors. '#' means a backspace character.
+
+Note that after backspacing an empty text, the text will continue to be empty.
+
+"""
+
+class Solution:
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        def build(s): #a helper function to avoid using nest for loop
+            stack = [] #init a stack
+            for char in s:  #iterate through s 
+                if char != "#":  
+                    stack.append(char)
+                elif stack:
+                    stack.pop()
+
+            return "".join(stack) # use "".join function to ["abc"]
+
+        return build(s) == build(t) #call the helper function and return a bool value
