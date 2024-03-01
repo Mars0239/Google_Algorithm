@@ -5,3 +5,13 @@ Given an integer array nums sorted in non-decreasing order, return an array of t
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
         return sorted(x*x for x in nums)
+
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        ans = []
+        for i in nums:
+            cur = 0 
+            cur = i ** 2 
+            ans.append(cur)
+        return sorted(ans)
+        
