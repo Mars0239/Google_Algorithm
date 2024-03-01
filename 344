@@ -4,7 +4,7 @@ Write a function that reverses a string. The input string is given as an array o
 
 You must do this by modifying the input array in-place with O(1) extra memory.
 """
-class Solution:
+class Solution: # with a helper function
   def reverseString(self, s):
     def helper(left, right):
       if s is None or s == 1:
@@ -14,3 +14,12 @@ class Solution:
         s[left],s[right] = s[right], s[left]
         helper(left+1, right-1)
     helper(0, len(s)-1)
+
+class Solution: # two pointers function 
+  def reverseString(self, s):
+    i , j = 0, len(s)-1 
+    while i < j :
+        s[i],s[j] = s[j], s[i]
+        i += 1
+        j -= 1 
+    return s 
